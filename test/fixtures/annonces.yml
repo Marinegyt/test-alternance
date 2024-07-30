@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyString
+  title: MyString
+  distance: 1.5
+  fullAddress: MyString
+  url: MyString
+  description: MyText
+  creationDate: 2024-07-30
+  contractType: MyString
+  contractDescription: MyString
+  type: 
+
+two:
+  id: MyString
+  title: MyString
+  distance: 1.5
+  fullAddress: MyString
+  url: MyString
+  description: MyText
+  creationDate: 2024-07-30
+  contractType: MyString
+  contractDescription: MyString
+  type: 
