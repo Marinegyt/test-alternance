@@ -4,9 +4,9 @@ class AnnoncesController < ApplicationController
     @annonces = Annonce.all
   end
 
- def show
+  def show
     @annonce = Annonce.find(params[:id])
- end
+  end
 
   # def create
   #   @annonce = call_annonce(annonce_params)
@@ -16,14 +16,14 @@ class AnnoncesController < ApplicationController
 
   def annonce_params
     params.permit(:annonceId,
-                                    :title,
-                                    :description,
-                                    :distance,
-                                    :fullAddress,
-                                    :url,
-                                    :creationDate,
-                                    :contractType,
-                                    :contractDescription,
-                                    :type)
+                  :title,
+                  :description,
+                  :distance,
+                  :fullAddress,
+                  :url,
+                  :creationDate,
+                  :contractType,
+                  :contractDescription,
+                  :type)
   end
 end
