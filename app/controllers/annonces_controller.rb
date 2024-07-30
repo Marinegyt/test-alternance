@@ -4,10 +4,6 @@ class AnnoncesController < ApplicationController
     @annonces = Annonce.all
   end
 
-  def show
-    @annonce = Annonce.find(params[:id])
-  end
-
   private
 
   def annonce_params

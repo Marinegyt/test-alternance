@@ -15,8 +15,9 @@ class AnnonceService
     response = Faraday.get(url, params, headers)
     parsed_response = JSON.parse(response.body)
     parsed_response['peJobs']['results'].each do |data|
-
+      # Tester si l'annonce existe déjà
       if Annonce.find_by(annonceId: data['id']).present?
+        # Tester si la distance est inférieure au rayon si oui on update sinon on destroy
         if data['place']['distance'] < params[:radius]
           Annonce.find_by(annonceId: data['id']).update(
             title: data['title'],
@@ -31,7 +32,7 @@ class AnnonceService
           Annonce.find_by(annonceId: data['id']).destroy
         end
       end
-
+      # Si l'annonce n'existe pas, la créer si la distance est inférieure au rayon
       if data['place']['distance'] < params[:radius]
         Annonce.find_or_create_by(
           annonceId: data['id'],
