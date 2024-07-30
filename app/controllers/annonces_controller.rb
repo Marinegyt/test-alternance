@@ -1,25 +1,21 @@
 class AnnoncesController < ApplicationController
   def index
+    @annonces = AnnonceService.call_annonce
     @annonces = Annonce.all
   end
 
-  def new
-    @annonce = Annonce.new
-  end
+ def show
+    @annonce = Annonce.find(params[:id])
+ end
 
-  def create
-    @annonce = Annonce.new(annonce_params)
-    if @annonce.save
-      redirect_to @annonce
-    else
-      render 'new'
-    end
-  end
+  # def create
+  #   @annonce = call_annonce(annonce_params)
+  # end
 
   private
 
   def annonce_params
-    params.require(:annonce).permit(:annonceId,
+    params.permit(:annonceId,
                                     :title,
                                     :description,
                                     :distance,

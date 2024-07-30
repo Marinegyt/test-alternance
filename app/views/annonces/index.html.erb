@@ -1,0 +1,18 @@
+<div class='container'>
+  <h1>Annonces d'alternace en Boucherie</h1>
+
+  <table class="table-auto">
+      <% @annonces.each do |annonce| %>
+        <tr>
+          <td><%= annonce.title %></td>
+          <td><%= annonce.fullAddress %></td>
+          <td><%= annonce.distance %></td>
+          <td><%= annonce.contractDescription %></td>
+          <td><%= annonce.creationDate %></td>
+          <td><%= link_to 'Descrition du poste', annonce.description %></td>
+          <td><%= link_to 'Postuler', annonce.url %></td>
+        </tr>
+
+      <% end %>
+  </table>
+</div>
