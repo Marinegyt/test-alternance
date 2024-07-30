@@ -8,7 +8,7 @@ class AnnonceService
     response = Faraday.get(url, params, headers)
     parsed_response = JSON.parse(response.body)
     parsed_response['peJobs']['results'].each do |data|
-      # si l'id de dataId n'existe pas dans la base de donnée alors on crée une nouvelle annonce
+      # Si l'id de dataId n'existe pas dans la base de donnée alors on crée une nouvelle annonce
       Annonce.find_or_create_by(
         annonceId: data['id'],
         title: data['title'],
@@ -16,10 +16,20 @@ class AnnonceService
         distance: data['place']['distance'],
         fullAddress: data['place']['fullAddress'],
         url: data['url'],
-        creationDate: data['job']['creationDate'],
         contractType: data['job']['contactType'],
         contractDescription: data ['job']['contractDescription'],
-      )
+        # Si l'id de dataId existe dans la base de donnée alors on update l'annonce
+      ) && next if Annonce.find_by(annonceId: data['id']).nil?
+        Annonce.find_by(annonceId: data['id']).update(
+          title: data['title'],
+          description: data['job']['description'],
+          distance: data['place']['distance'],
+          fullAddress: data['place']['fullAddress'],
+          url: data['url'],
+          contractType: data['job']['contactType'],
+          contractDescription: data ['job']['contractDescription'],
+          # Et si l'annonce n'est plus dans la liste des annonces alors on la supprime
+          ) && Annonce.find_by(annonceId: data['id']).destroy if Annonce.find_by(annonceId: data['id']).nil?
     end
   end
 end
