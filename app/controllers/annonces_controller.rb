@@ -8,10 +8,6 @@ class AnnoncesController < ApplicationController
     @annonce = Annonce.find(params[:id])
   end
 
-  # def create
-  #   @annonce = call_annonce(annonce_params)
-  # end
-
   private
 
   def annonce_params
